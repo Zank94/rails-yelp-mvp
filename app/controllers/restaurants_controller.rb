@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @review = Review.new
   end
 
   def new
@@ -20,6 +21,10 @@ class RestaurantsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def research
+    @restaurants = Restaurant.where("name LIKE '%#{params[:research]}%'")
   end
 
   def restaurants_params
